@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giiid</title>
+    <link rel="stylesheet" href="{% static 'crud-style.css' %}">
+</head>
+<body>
+    <body>
+        <div id="del">
+            <h2>Yaaayyy! You have completed {{task.activity}}🎉</h2> <br>
+            <form method="POST"> {%csrf_token%}
+                <button type="submit" style="width: 18.5%;
+                height: 40px;
+                border: 1px solid #dcdce6;
+                border-radius: 8px;
+                background-color: #298f12;
+                color: #fff;
+                cursor: pointer;">Done</button>
+            </form>
+        </div>
+    </body>
+</body>
+</html>

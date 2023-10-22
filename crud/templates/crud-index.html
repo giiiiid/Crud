@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giiid</title>
+    <link rel="stylesheet" href="{% static 'crud-style.css' %}">
+</head>
+<body>
+    <body>
+
+        <div id="app">
+          <h1>my Crud</h1>
+
+          {% for task in tasks %}
+          <table>
+            <!--tasks-->
+            <tr>
+              <ul>
+              <td><li>{{task.activity}} - {{task.location}}</li></td> 
+              <td style="font-family: Lato, sans-serif;font-size: 20px;font-weight: 400;font-style: italic;margin: 50px;"><a href="{% url 'delete' task.activity %}">
+                <h5>Delete</h5></a></td> 
+              <td><a href="{% url 'done' task.activity %}"> <h5>Done</h5></a></td> 
+              <td><a href="{% url 'update' task.activity %}"> <h5>Update</h5></a></td> 
+              </ul>
+            </tr>
+          </table>
+          {%endfor%}
+
+          <!--forms to create a new task-->
+          <form method="post">{%csrf_token%}
+          <input type="text" placeholder="New task" name="task" required><br><br>
+          <input type="text" placeholder="Location" name="location" required>
+          <!-- <input type="time" min="06:00" max="24:00" name="time" placeholder="Time"> -->
+          <button class='btn_add' type="submit">Add</button>
+          </form>
+          <p>Insert a new task</p>
+        </div>
+
+      </body>
+</body>
+</html>

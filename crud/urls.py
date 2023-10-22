@@ -1,0 +1,10 @@
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('', views.home, name='home'),
+    path('update/<str:activity>', views.update, name='update'),
+    path('delete/<str:activity>', views.delete, name='delete'),
+    path('done/<str:activity>', views.done, name='done')
+]
