@@ -19,14 +19,13 @@
             <!--tasks-->
             <tr>
               <ul>
-              <td><li>{{task.activity}} - {{task.location}}</li></td> 
-              <td style="font-family: Lato, sans-serif;font-size: 20px;font-weight: 400;font-style: italic;margin: 50px;"><a href="{% url 'delete' task.activity %}">
-                <h5>Delete</h5></a></td> 
-              <td><a href="{% url 'done' task.activity %}"> <h5>Done</h5></a></td> 
-              <td><a href="{% url 'update' task.activity %}"> <h5>Update</h5></a></td> 
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'detail' task.activity %}"><li>{{task.activity}}</li></a></td> 
+              <td style="font-family: Lato,sans-serif; font-size:20px; font-weight:400; font-style:italic; margin: 50px;"><a href="{% url 'delete' task.activity %}"> <h5>Delete</h5></a></td> 
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'done' task.activity %}"> <h5>Done</h5></a></td> 
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'update' task.activity %}"> <h5>Update</h5></a></td> 
               </ul>
             </tr>
-          </table>
+          </table><p></p>
           {%endfor%}
 
           <!--forms to create a new task-->

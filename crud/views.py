@@ -20,6 +20,13 @@ def home(request):
     return render(request, 'crud-index.html', context)
 
 
+# function to view a task - detailview
+def detail(request, activity):
+    task = Crud.objects.get(activity=activity)
+    context = {'task':task}
+    return render(request, 'crud-detail.html', context)
+
+
 # function to update a task
 def update(request, activity):
     task = Crud.objects.get(activity=activity)
