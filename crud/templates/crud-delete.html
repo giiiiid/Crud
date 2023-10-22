@@ -11,7 +11,7 @@
 <body>
     <body>
         <div id="del">
-            <h2>{{task.activity}} is about to be deleted🥺</h2> <br>
+            <h2>Are you sure you want to delete {{task.activity}}?🥺</h2> <br>
             <form method="POST"> {%csrf_token%}
                 <button class='btn_delete' type="submit">Delete</button>
             </form>

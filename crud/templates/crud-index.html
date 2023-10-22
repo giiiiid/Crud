@@ -17,14 +17,24 @@
           {% for task in tasks %}
           <table>
             <!--tasks-->
-            <tr>
+            <!-- <tr>
               <ul>
               <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'detail' task.activity %}"><li>{{task.activity}}</li></a></td>
-              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'done' task.activity %}"><img src="{% static 'done.png' %}" style="size:10%;"></a></td>
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'done' task.activity %}"><img src="{% static 'done.png' %}" width="37" height="37"></a></td>
               <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'update' task.activity %}"> <h5>Update</h5></a></td>
               <td style="font-family: Lato,sans-serif; font-size:20px; padding: 0 15px 2px 15px;"><a href="{% url 'delete' task.activity %}"> <h5>Delete</h5></a></td>   
               </ul>
+            </tr> -->
+            <div style="float: right;">
+            <tr>
+              <ul>
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'detail' task.activity %}"><li>{{task.activity}}</li></a></td>
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'done' task.activity %}"><img src="{% static 'done.png' %}" width="37" height="37"></a></td>
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'update' task.activity %}"><img src="{% static 'update.png' %}" width="37" height="37"></a></td>
+              <td style="font-family: Lato,sans-serif; font-size:20px; padding: 0 15px 2px 15px;"><a href="{% url 'delete' task.activity %}"><img src="{% static 'delete.png' %}" width="37" height="37"></a></td>   
+              </ul>
             </tr>
+            </div>
           </table><p></p>
           {%endfor%}
 
@@ -37,7 +47,6 @@
           </form>
           <p>Insert a new task</p>
         </div>
-
       </body>
 </body>
 </html>

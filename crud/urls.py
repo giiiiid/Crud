@@ -7,5 +7,6 @@ urlpatterns = [
     path('detail/<str:activity>', views.detail, name='detail'),
     path('update/<str:activity>', views.update, name='update'),
     path('delete/<str:activity>', views.delete, name='delete'),
-    path('done/<str:activity>', views.done, name='done')
+    path('done/<str:activity>', views.done, name='done'),
+    path('api/<str:activity>', views.crudApi, name='api')
 ]
