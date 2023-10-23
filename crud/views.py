@@ -71,8 +71,8 @@ def delete(request, activity):
     return render(request, 'crud-delete.html', context)
 
 
-
-@api_view(['GET','POST','PUT','DELETE'])
+# function for the API
+@api_view(['GET'])
 def crudApi(request):
     task = Crud.objects.all()
     serializer = CrudSerializer(task, many=True)
