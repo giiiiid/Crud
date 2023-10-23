@@ -22,7 +22,7 @@ def home(request):
     
     tasks = Crud.objects.all()
     context = {'tasks':tasks}
-    return render(request, 'crud-index.html', context)
+    return render(request, 'index.html', context)
 
 
 # function to view a task - detailview
