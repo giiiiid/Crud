@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse
+from django.contrib import messages
+from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import CrudSerializer
-from .forms import CrudForms, SongForms
-from .models import Crud, Song
+from .forms import CrudForms
+from .models import Crud
 # Create your views here.
 
 
@@ -69,6 +71,22 @@ def delete(request, activity):
 
     context = {'task':task}
     return render(request, 'crud-delete.html', context)
+
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['search']
+        lookup = Q(activity__icontains=searched) | Q(location__icontains=searched)
+        searched_tasks = Crud.objects.filter(lookup)
+        
+        if searched_tasks.exists():
+            context = {'searched_tasks':searched_tasks}
+        else:
+            messages.info(request, f'{searched} does not exist')
+            context = {'searched':searched}
+            return redirect('home')
+        return render(request, 'search-task.html', context)
+    else:
+        return render(request, 'search-task.html')
 
 
 # function for the API

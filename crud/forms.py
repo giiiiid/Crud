@@ -1,5 +1,5 @@
 from django import forms
-from .models import Crud, Song
+from .models import Crud
 
 class CrudForms(forms.ModelForm):
     class Meta:

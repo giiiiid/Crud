@@ -10,17 +10,24 @@
 </head>
 <body>
     <body>
-
+      <h1>my Crud</h1>
+        <div class="search-box">
+          <form method="post" action="{% url 'search' %}">{%csrf_token%}
+            <input type="text" class="input-search" placeholder="Search a task..." name="search">
+            <button class="btn btn-outline-secondary" type="submit">Search</button>
+          </form>
+        </div>
+        {% for message in messages %}
+          <h3 style="color: crimson;">{{message}}</h3>
+          {%endfor%}
         <div id="app">
-          <h1>my Crud</h1>
-
           {% for task in tasks %}
           <table>
             <!--tasks-->
             <div style="float: right;">
             <tr>
               <ul>
-              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'detail' task.activity %}"><li>{{task.activity}}</li></a></td>
+              <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'detail' task.activity %}"><li>{{task.activity}}- {{task.location}}</li></a></td>
               <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'done' task.activity %}"><img src="{% static 'done.png' %}" width="37" height="37"></a></td>
               <td style="font-family: Lato,sans-serif; font-size:20px;"><a href="{% url 'update' task.activity %}"><img src="{% static 'update.png' %}" width="37" height="37"></a></td>
               <td style="font-family: Lato,sans-serif; font-size:20px; padding: 0 15px 2px 15px;"><a href="{% url 'delete' task.activity %}"><img src="{% static 'delete.png' %}" width="37" height="37"></a></td>   
