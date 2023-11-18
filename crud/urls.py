@@ -11,6 +11,6 @@ urlpatterns = [
     path('done/<str:activity>', views.done, name='done'),
     path('search', views.search, name='search'),
     path('signup', views.sign_up, name='signup'),
-    path('login', views.login, name='login'),
+    path('login', views.login_user, name='login'),
     path('api', views.crudApi, name='api'),
 ]

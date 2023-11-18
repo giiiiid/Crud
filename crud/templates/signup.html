@@ -1,14 +1,19 @@
 {% extends 'layout.html' %}
     {% load static %}
+    {% load widget_tweaks %}
         {% block content %}
             <h1>Sign Up</h1>
 
             <div>
                 <form method="post" action="">{%csrf_token%}
-                    <input type="text" placeholder="Username" name="username" required><br>
+                    {% render_field forms.username placeholder='Username' %}
+                    {% render_field forms.email placeholder='Email' %}
+                    {% render_field forms.password1 placeholder='Password' %}
+                    {% render_field forms.password2 placeholder='Confirm Password' %}
+                    <!-- <input type="text" placeholder="Username" name="username" required><br>
                     <input type="email" placeholder="Email" name="email">
                     <input type="text" placeholder="Password" name="password" required>
-                    <input type="text" placeholder="Confirm Password" name="confirm_password" required>
+                    <input type="text" placeholder="Confirm Password" name="confirm_password" required> -->
                     <button class='btn_add' type="submit">Sign Up</button>
                 </form>
             </div>

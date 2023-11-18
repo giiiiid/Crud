@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import CrudSerializer
-from .forms import CrudForms, UserAuthenticationForms
+from .forms import CrudForms, SignUpForms, LoginForms
 from .models import Crud
 # Create your views here.
 
@@ -92,15 +93,15 @@ def search(request):
 
 
 def sign_up(request):
-    forms = UserAuthenticationForms()
+    forms = SignUpForms()
     if forms.is_valid():
         forms.save()
-    
-    return render(request, 'signup.html')
+    context = {'forms':forms}
+    return render(request, 'signup.html', context)
 
 
-def login(request):
-    forms = UserAuthenticationForms()
+def login_user(request):
+    forms = LoginForms()
     if forms.is_valid():
         forms.save()
     context = {'forms':forms}
