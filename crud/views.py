@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.http import JsonResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
@@ -94,8 +95,15 @@ def search(request):
 
 def sign_up(request):
     forms = SignUpForms()
-    if forms.is_valid():
-        forms.save()
+    if request.method == 'POST':
+        forms = SignUpForms(request.POST)
+        if forms.is_valid():
+            # username = forms.cleaned_data['username']
+            # email = forms.cleaned_data['email']
+            # password = forms.cleaned_data['password1']
+            # user = authenticate(request, username=username, email=email, password=password)
+            forms.save()
+            return redirect('login')
     context = {'forms':forms}
     return render(request, 'signup.html', context)
 
