@@ -94,17 +94,19 @@ def search(request):
 
 
 def sign_up(request):
-    forms = SignUpForms()
+    # forms = SignUpForms()
     if request.method == 'POST':
-        forms = SignUpForms(request.POST)
-        if forms.is_valid():
+        username = request.POST['username']
+        email = request.POST['email']
+        password1 = request.POST['password']
+        password2 = request.POST['confirm_password']
             # username = forms.cleaned_data['username']
             # email = forms.cleaned_data['email']
             # password = forms.cleaned_data['password1']
-            # user = authenticate(request, username=username, email=email, password=password)
-            forms.save()
-            return redirect('login')
-    context = {'forms':forms}
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        user.save()
+        # return redirect('login')
+    context = {}
     return render(request, 'signup.html', context)
 
 
