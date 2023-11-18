@@ -7,13 +7,16 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .serializers import CrudSerializer
-from .forms import CrudForms
+from .forms import CrudForms, UserAuthenticationForms
 from .models import Crud
 # Create your views here.
 
 
 # function to display all tasks
-def home(request):
+def index(request):
+    return render(request, 'index.html')
+
+def user_home(request):
     if request.method == 'POST':
         activity = request.POST['task']
         location = request.POST['location']
@@ -24,10 +27,9 @@ def home(request):
     
     tasks = Crud.objects.all()
     context = {'tasks':tasks}
-    return render(request, 'index.html', context)
-
-
+    return render(request, 'user-home.html')
 # function to view a task - detailview
+
 def detail(request, activity):
     task = Crud.objects.get(activity=activity)
     context = {'task':task}
@@ -87,6 +89,30 @@ def search(request):
         return render(request, 'search-task.html', context)
     else:
         return render(request, 'search-task.html')
+
+
+def sign_up(request):
+    forms = UserAuthenticationForms()
+    if forms.is_valid():
+        forms.save()
+    
+    return render(request, 'signup.html')
+
+
+def login(request):
+    forms = UserAuthenticationForms()
+    if forms.is_valid():
+        forms.save()
+    context = {'forms':forms}
+    return render(request, 'login.html', context)
+
+
+
+
+
+
+
+
 
 
 # function for the API

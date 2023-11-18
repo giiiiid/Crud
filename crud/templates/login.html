@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+    {% load static %}
+    {% load widget_tweaks %}
+        {% block content %}
+        <h1>Log In</h1>
+
+        <div>
+            <form method="post" action="">{%csrf_token%}
+                <!-- <input type="text" placeholder="Username" name="username" required><br><br>
+                <input type="text" placeholder="Password" name="password" required> -->
+                {% render_field forms.username placeholder='Username' %}
+                {% render_field forms.password placeholder='Password' %}
+                <button class='btn_add' type="submit">Log In</button>
+            </form>
+        </div>
+        {% endblock content %}
