@@ -79,7 +79,7 @@ def search(request):
         searched_tasks = Crud.objects.filter(lookup)
         
         if searched_tasks.exists():
-            context = {'searched_tasks':searched_tasks}
+            context = {'searched_tasks':searched_tasks, 'searched':searched}
         else:
             messages.info(request, f'{searched} does not exist')
             context = {'searched':searched}

@@ -1,22 +1,14 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giiid</title>
-    <link rel="stylesheet" href="{% static 'crud-style.css' %}">
-</head>
-<body>
-    <body>
+{% extends 'base.html' %}
+  {% load static %}
+    {% block content %}
+
       <h1>my Crud</h1>
-        <div class="search-box">
+        <!-- <div class="search-box"> -->
           <form method="post" action="{% url 'search' %}">{%csrf_token%}
-            <input type="text" class="input-search" placeholder="Search a task..." name="search">
+            <input type="text" class="input-search" placeholder="Search for a task..." name="search" style="background-color:#59a2ad;">
             <button class="btn btn-outline-secondary" type="submit">Search</button>
           </form>
-        </div>
+        <!-- </div> -->
         {% for message in messages %}
           <h3 style="color: crimson;">{{message}}</h3>
           {%endfor%}
@@ -46,6 +38,5 @@
           </form>
           <p>Insert a new task</p>
         </div>
-      </body>
-</body>
-</html>
+        
+    {% endblock content %}
