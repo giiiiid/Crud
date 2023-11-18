@@ -3,13 +3,20 @@
     {% load widget_tweaks %}
         {% block content %}
             <h1>Sign Up</h1>
-
+            <p>
+                Already have an account? <a href="{% url 'login' %}" style="color: #335c62;">Log In</a>
+            </p>
+                {% for message in messages %}
+                    {{message}}
+                {% endfor %}
             <div>
                 <form method="post" action="">{%csrf_token%}
+                    
                     <!-- {% render_field forms.username placeholder='Username' %}
                     {% render_field forms.email placeholder='Email' %}
                     {% render_field forms.password1 placeholder='Password' %}
                     {% render_field forms.password2 placeholder='Confirm Password' %} -->
+
                     <input type="text" placeholder="Username" name="username" required><br>
                     <input type="email" placeholder="Email" name="email">
                     <input type="text" placeholder="Password" name="password" required>

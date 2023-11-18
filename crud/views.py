@@ -1,16 +1,19 @@
-from django.shortcuts import render, redirect
+from django.db.models import Q
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.http import JsonResponse
-from django.contrib import messages
-from django.contrib.auth.models import User
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import User, auth
 from django.contrib.auth import authenticate, login, logout
-from django.db.models import Q
+
+from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from rest_framework import status
+
+from .models import Crud
 from .serializers import CrudSerializer
 from .forms import CrudForms, SignUpForms, LoginForms
-from .models import Crud
+
 # Create your views here.
 
 
@@ -103,18 +106,33 @@ def sign_up(request):
             # username = forms.cleaned_data['username']
             # email = forms.cleaned_data['email']
             # password = forms.cleaned_data['password1']
-        user = User.objects.create_user(username=username, email=email, password=password1)
-        user.save()
+        if password1 == password2:
+            if User.objects.filter(username=username).exists():
+                messages.info(request, 'Username already exists')
+            elif User.objects.filter(email=email).exists():
+                messages.info(request, 'Email already exists')
+            else:
+                user = User.objects.create_user(username=username, email=email, password=password1)
+                user.save()
+                messages.success(request, f'{username}, your account has been created')
+        else:
+            messages.info(request, 'Passwords do not match')
         # return redirect('login')
     context = {}
     return render(request, 'signup.html', context)
 
 
 def login_user(request):
-    forms = LoginForms()
-    if forms.is_valid():
-        forms.save()
-    context = {'forms':forms}
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+
+        user = auth.authenticate(request, username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('home')
+    context = {}
     return render(request, 'login.html', context)
 
 
