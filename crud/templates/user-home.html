@@ -2,7 +2,9 @@
   {% load static %}
     {% block content %}
 
-      <h1>my Crud</h1>
+      <h1>my Crud</h1><p>
+        <a href="{% url 'logout' %}">Logout</a>
+      </p>
         <!-- <div class="search-box"> -->
           <form method="post" action="{% url 'search' %}">{%csrf_token%}
             <input type="text" class="input-search" placeholder="Search for a task..." name="search" style="background-color:#59a2ad;">

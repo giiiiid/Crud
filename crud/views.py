@@ -115,11 +115,12 @@ def sign_up(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password1)
                 user.save()
-                Profile.objects.create(user=user)
+                Profile.objects.create(user=user, username=username, email=email)
                 messages.success(request, f'{username}, your account has been created')
+                return redirect('login')
         else:
             messages.info(request, 'Passwords do not match')
-        # return redirect('login')
+        
     context = {}
     return render(request, 'signup.html', context)
 
@@ -139,6 +140,9 @@ def login_user(request):
     return render(request, 'login.html', context)
 
 
+def logout_user(request):
+    logout(request)
+    return redirect('login')
 
 
 
