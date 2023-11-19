@@ -21,12 +21,13 @@ from .forms import CrudForms, SignUpForms, LoginForms
 def index(request):
     return render(request, 'index.html')
 
-def user_home(request):
+def user_home(request, name):
+    name = request.user
     if request.method == 'POST':
         activity = request.POST['task']
         location = request.POST['location']
 
-        task = Crud.objects.create(activity=activity, location=location)
+        task = Crud.objects.create(activity=activity, location=location, profile=profile)
         task.save()
         return redirect('home')
     
@@ -131,7 +132,7 @@ def login_user(request):
 
         if user is not None:
             auth.login(request, user)
-            return redirect('home')
+            # return redirect('home')
     context = {}
     return render(request, 'login.html', context)
 
