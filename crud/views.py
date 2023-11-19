@@ -10,7 +10,7 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
-from .models import Crud
+from .models import Crud, Profile
 from .serializers import CrudSerializer
 from .forms import CrudForms, SignUpForms, LoginForms
 
@@ -21,13 +21,13 @@ from .forms import CrudForms, SignUpForms, LoginForms
 def index(request):
     return render(request, 'index.html')
 
-def user_home(request, name):
-    name = request.user
+def user_home(request):
+    
     if request.method == 'POST':
         activity = request.POST['task']
         location = request.POST['location']
 
-        task = Crud.objects.create(activity=activity, location=location, profile=profile)
+        task = Crud.objects.create(activity=activity, location=location)
         task.save()
         return redirect('home')
     
@@ -115,6 +115,7 @@ def sign_up(request):
             else:
                 user = User.objects.create_user(username=username, email=email, password=password1)
                 user.save()
+                Profile.objects.create(user=user)
                 messages.success(request, f'{username}, your account has been created')
         else:
             messages.info(request, 'Passwords do not match')
@@ -125,14 +126,15 @@ def sign_up(request):
 
 def login_user(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-        user = auth.authenticate(request, username=username, password=password)
+        user = authenticate(request, username=username, password=password)
 
         if user is not None:
             auth.login(request, user)
-            # return redirect('home')
+            return redirect('home')
+
     context = {}
     return render(request, 'login.html', context)
 
