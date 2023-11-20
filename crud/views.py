@@ -22,20 +22,21 @@ def index(request):
     return render(request, 'index.html')
 
 def user_home(request):
+    username = request.user.profile
     
     if request.method == 'POST':
         activity = request.POST['task']
         location = request.POST['location']
 
-        task = Crud.objects.create(activity=activity, location=location)
+        task = Crud.objects.create(activity=activity, location=location, profile=username)
         task.save()
         return redirect('home')
     
     tasks = Crud.objects.all()
     context = {'tasks':tasks}
     return render(request, 'user-home.html')
-# function to view a task - detailview
 
+# function to view a task - detailview
 def detail(request, activity):
     task = Crud.objects.get(activity=activity)
     context = {'task':task}
@@ -51,7 +52,7 @@ def update(request, activity):
         forms = CrudForms(request.POST, instance=task)
         if forms.is_valid():
             forms.save()
-        return redirect('home')
+        # return redirect('home')
 
     context = {'forms':forms, 'task':task}
     return render(request, 'crud-update.html', context)
@@ -63,7 +64,7 @@ def done(request, activity):
 
     if request.method == 'POST':
         task.delete()
-        return redirect('home')
+        # return redirect('home')
 
     context = {'task':task}
     return render(request, 'crud-done.html', context)
@@ -75,7 +76,7 @@ def delete(request, activity):
 
     if request.method == 'POST':
         task.delete()
-        return redirect('home')
+        # return redirect('home')
 
     context = {'task':task}
     return render(request, 'crud-delete.html', context)
@@ -91,7 +92,7 @@ def search(request):
         else:
             messages.info(request, f'{searched} does not exist')
             context = {'searched':searched}
-            return redirect('home')
+            # return redirect('home')
         return render(request, 'search-task.html', context)
     else:
         return render(request, 'search-task.html')

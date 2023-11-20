@@ -6,10 +6,8 @@ from .models import Crud #Profile
 class CrudForms(forms.ModelForm):
     class Meta:
         model = Crud
-        fields = [
-            'activity',
-            'location'
-        ]
+        fields = ['activity','location']
+        
 
 
 class SignUpForms(UserCreationForm):
