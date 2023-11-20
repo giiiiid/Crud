@@ -22,19 +22,21 @@ def index(request):
     return render(request, 'index.html')
 
 def user_home(request):
-    username = request.user.profile
+    user = request.user.profile
     
     if request.method == 'POST':
         activity = request.POST['task']
         location = request.POST['location']
 
-        task = Crud.objects.create(activity=activity, location=location, profile=username)
+        task = Crud.objects.create(activity=activity, location=location, profile_name=user)
         task.save()
         return redirect('home')
     
-    tasks = Crud.objects.all()
+    
+    tasks = user.crud_set.all()
+    # print(tasks)
     context = {'tasks':tasks}
-    return render(request, 'user-home.html')
+    return render(request, 'user-home.html', context)
 
 # function to view a task - detailview
 def detail(request, activity):
@@ -52,7 +54,7 @@ def update(request, activity):
         forms = CrudForms(request.POST, instance=task)
         if forms.is_valid():
             forms.save()
-        # return redirect('home')
+        return redirect('home')
 
     context = {'forms':forms, 'task':task}
     return render(request, 'crud-update.html', context)
@@ -64,7 +66,7 @@ def done(request, activity):
 
     if request.method == 'POST':
         task.delete()
-        # return redirect('home')
+        return redirect('home')
 
     context = {'task':task}
     return render(request, 'crud-done.html', context)
@@ -76,7 +78,7 @@ def delete(request, activity):
 
     if request.method == 'POST':
         task.delete()
-        # return redirect('home')
+        return redirect('home')
 
     context = {'task':task}
     return render(request, 'crud-delete.html', context)

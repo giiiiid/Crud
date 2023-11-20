@@ -14,7 +14,7 @@ class Profile(models.Model):
 class Crud(models.Model):
     activity = models.CharField(max_length=200, default='', null=False)
     location = models.CharField(max_length=200, default='')
-    profile = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
+    profile_name = models.ForeignKey(Profile, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.activity
