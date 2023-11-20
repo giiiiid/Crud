@@ -32,7 +32,6 @@ def user_home(request):
         task.save()
         return redirect('home')
     
-    
     tasks = user.crud_set.all()
     # print(tasks)
     context = {'tasks':tasks}

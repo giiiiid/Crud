@@ -5,5 +5,6 @@ class CrudSerializer(serializers.ModelSerializer):
         model = Crud
         fields = [
             'activity',
-            'location'
+            'location',
+            'profile_name'
         ]
