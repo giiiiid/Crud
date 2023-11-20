@@ -3,6 +3,12 @@
     {% load widget_tweaks %}
         {% block content %}
         <h1>Log In</h1>
+
+        {% load socialaccount %}
+        <a href="{% provider_login_url 'google' %}?next=/">
+            <h4>Login with Google</h4>
+        </a>
+
         <p>
             Don't have an account? <a href="{% url 'signup' %}" style="color: #335c62;">Sign Up</a>
         </p>
