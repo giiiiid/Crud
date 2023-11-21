@@ -5,7 +5,7 @@
         <h1>Log In</h1>
 
         {% load socialaccount %}
-        <a href="{% provider_login_url 'google' %}?next=/">
+        <a href="{% provider_login_url 'google' %}?next={{request.path}}">
             <h4>Login with Google</h4>
         </a>
 
