@@ -3,6 +3,11 @@
     {% load widget_tweaks %}
         {% block content %}
             <h1>Sign Up</h1>
+        {% load socialaccount %}
+            <a href="{% provider_login_url 'google' %}?next={{request.path}}">
+                <h4>Sign up with Google</h4>
+            </a>
+
             <p>
                 Already have an account? <a href="{% url 'login' %}" style="color: #335c62;">Log In</a>
             </p>

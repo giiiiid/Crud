@@ -27,8 +27,7 @@ SECRET_KEY = 'django-insecure-r_^j-!ppc_bmgfs4dta^8944t2r7crlv&0$-04-6pc)%zr64d6
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','giiiiid.github.io']
-
+ALLOWED_HOSTS = ['localhost', "127.0.0.1"]
 
 # Application definition
 SITE_ID = 2
@@ -158,10 +157,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Authentication Backend
-AUTHENTICATION_BACKENDS = (
+AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend"
-)
+]
 
-LOGIN_REDIRECT_URL = "/crud/home"
-LOGOUT_REDIRECT_URL = "/crud/login"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

@@ -116,8 +116,11 @@ def sign_up(request):
                 messages.info(request, 'Email already exists')
             else:
                 user = User.objects.create_user(username=username, email=email, password=password1)
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
                 user.save()
-                Profile.objects.create(user=user, username=username, email=email)
+                
+                profile = Profile.objects.create(user=user, username=username, email=email)
+                
                 messages.success(request, f'{username}, your account has been created')
                 return redirect('login')
         else:
